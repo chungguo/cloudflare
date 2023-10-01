@@ -6,4 +6,9 @@ compatibility_date = "2023-05-15"
 # Docs: https://developers.cloudflare.com/workers/platform/triggers/cron-triggers/
 # Configuration: https://developers.cloudflare.com/workers/wrangler/configuration/#triggers
 [triggers]
-crons = ["* * * * *"] # * * * * * = run every minute
+crons = ["0 10 * * *"]
+
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "pt"
+database_id = "b483bf49-2e38-4d3d-b269-e9ace3bae1ac"
