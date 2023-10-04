@@ -1,14 +1,15 @@
-name = "pt-attendance"
+name = "robot"
 main = "src/index.ts"
-compatibility_date = "2023-05-15"
+node_compat = true
+compatibility_date = "2023-08-15"
 
 # Cron Triggers
 # Docs: https://developers.cloudflare.com/workers/platform/triggers/cron-triggers/
 # Configuration: https://developers.cloudflare.com/workers/wrangler/configuration/#triggers
 [triggers]
-crons = ["0 10 * * *", "0 18 * * *"]
+crons = ["0 10 * * *", "0 12 * * *"]
 
 [[d1_databases]]
 binding = "DB" # i.e. available in your Worker on env.DB
-database_name = "pt"
-database_id = "b483bf49-2e38-4d3d-b269-e9ace3bae1ac"
+database_name = "robot"
+database_id = "e99784e2-71ed-4827-b777-f7e2be9efe85"
