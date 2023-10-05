@@ -2,6 +2,7 @@ name = "robot"
 main = "src/index.ts"
 node_compat = true
 compatibility_date = "2023-08-15"
+compatibility_flags = [ "nodejs_compat" ]
 
 # Cron Triggers
 # Docs: https://developers.cloudflare.com/workers/platform/triggers/cron-triggers/
