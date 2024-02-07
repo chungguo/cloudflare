@@ -27,6 +27,7 @@ export default async function attendance(env: Env) {
 
 		await page.goto(`https://${host}${path}`, {
 			waitUntil: 'networkidle0',
+			timeout: 10000,
 		});
 
 		const text = await page.evaluate(() => document.body.innerText);
