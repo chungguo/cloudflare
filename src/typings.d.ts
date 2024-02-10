@@ -7,4 +7,8 @@ interface Env {
 
 	// browserless token
 	BROWSERLESS_TOKEN: string;
+
+	TELEGRAM_TOKEN: string;
+
+	TELEGRAM_CHAT_ID: string;
 }

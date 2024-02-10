@@ -7,9 +7,9 @@ compatibility_date = "2024-01-29"
 # Docs: https://developers.cloudflare.com/workers/platform/triggers/cron-triggers/
 # Configuration: https://developers.cloudflare.com/workers/wrangler/configuration/#triggers
 [triggers]
-crons = ["0 10 * * *", "0 */4 * * *"]
+crons = ["0 9 * * *", "0 10 * * *", "0 14 * * *", "0 20 * * *"]
 
 [[d1_databases]]
-binding = "DB" # i.e. available in your Worker on env.DB
+binding = "DB"                                       # i.e. available in your Worker on env.DB
 database_name = "robot"
 database_id = "e99784e2-71ed-4827-b777-f7e2be9efe85"

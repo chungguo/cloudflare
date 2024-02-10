@@ -1,5 +1,6 @@
 import puppeteer from '@cloudflare/puppeteer';
 
+import { sendTextMessage } from '../tg';
 import { cookieParser } from '../utils/cookie';
 
 type Site = Record<'host' | 'path' | 'cookies', string>;
@@ -7,7 +8,7 @@ type Site = Record<'host' | 'path' | 'cookies', string>;
 /**
  * PT 站点签到
  * */
-export default async function attendance(env: Env) {
+export async function attendance(env: Env) {
 	const { results } = await env.DB.prepare("SELECT * FROM tb_pt_sites").all<Site>();
 
 	const browser = await puppeteer.connect({
@@ -32,8 +33,6 @@ export default async function attendance(env: Env) {
 
 		const text = await page.evaluate(() => document.body.innerText);
 
-		console.log(`[pt][${host}]: ${text}`);
-
 		response.push({
 			host,
 			text,
@@ -41,6 +40,8 @@ export default async function attendance(env: Env) {
 	}
 
 	await page.close();
+
+	await sendTextMessage.call(env, JSON.stringify(response));
 
 	browser.disconnect();
 

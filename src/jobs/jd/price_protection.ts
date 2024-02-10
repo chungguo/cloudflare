@@ -1,6 +1,7 @@
 import puppeteer from '@cloudflare/puppeteer';
 
 import { cookieParser } from '../../utils/cookie';
+import { sendTextMessage } from '../../tg';
 
 // 一键价保 H5 页面地址
 const PAGE_URL = 'https://msitepp-fm.jd.com/rest/priceprophone/priceProPhoneMenu';
@@ -8,7 +9,7 @@ const PAGE_URL = 'https://msitepp-fm.jd.com/rest/priceprophone/priceProPhoneMenu
 const ONE_BTN_ID = 'one-btn';
 const ONE_BTN_DIS_ID = 'one-btn-dis';
 
-export default async function priceProtect(env: Env) {
+export async function priceProtect(env: Env) {
 	const browser = await puppeteer.connect({
 		browserWSEndpoint: `wss://browserless.chungguo.me?token=${env.BROWSERLESS_TOKEN}`,
 	});
@@ -37,7 +38,7 @@ export default async function priceProtect(env: Env) {
 
 	const data = await page.evaluate(() => (document.querySelector('.jb-all') as HTMLElement)?.innerText)
 
-	console.log(`[jd][price]: ${data}`);
+	await sendTextMessage.call(env, JSON.stringify(data));
 
 	await page.close();
 
