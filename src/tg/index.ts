@@ -1,3 +1,4 @@
+// https://core.telegram.org/bots/api#available-methods
 const MAX_LENGTH = 4096;
 
 export async function sendTextMessage(this: Env, text: string) {
@@ -8,6 +9,7 @@ export async function sendTextMessage(this: Env, text: string) {
 		},
 		body: JSON.stringify({
 			chat_id: this.TELEGRAM_CHAT_ID,
+			parse_mode: 'MarkdownV2',
 			text: text.substring(0, MAX_LENGTH),
 		}),
 	});

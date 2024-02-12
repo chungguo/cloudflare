@@ -31,7 +31,11 @@ export async function attendance(env: Env) {
 			timeout: 10000,
 		});
 
-		const text = await page.evaluate(() => document.body.innerText);
+		const text = await page.evaluate(() => {
+			const main = document.querySelector('td#outer table.main');
+			const table = main?.querySelector('table');
+			return table ? table.textContent : main?.textContent ?? '';
+		});
 
 		response.push({
 			host,
@@ -39,11 +43,15 @@ export async function attendance(env: Env) {
 		});
 	}
 
+	const message = response.reduce((m, item) => {
+		const { host, text } = item;
+		return `${m} <br/> _${host}_ \n ${text}`;
+	}, '*PT 签到*<br/><br/>');
+
 	await page.close();
 
-	await sendTextMessage.call(env, JSON.stringify(response));
+	await sendTextMessage.call(env, message);
 
 	browser.disconnect();
-
 	return response;
 }

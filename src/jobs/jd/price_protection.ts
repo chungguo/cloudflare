@@ -24,7 +24,7 @@ export async function priceProtect(env: Env) {
 		waitUntil: 'networkidle0',
 	});
 
-	const enabled = await page.waitForSelector(`#${ONE_BTN_ID}`);
+	const enabled = await page.$(`#${ONE_BTN_ID}`);
 
 	// 一键保价不可见
 	const enabledInVisible = enabled?.evaluateHandle((dom) => (dom as HTMLElement).offsetParent === null);
@@ -38,7 +38,7 @@ export async function priceProtect(env: Env) {
 
 	const data = await page.evaluate(() => (document.querySelector('.jb-all') as HTMLElement)?.innerText)
 
-	await sendTextMessage.call(env, JSON.stringify(data));
+	await sendTextMessage.call(env, `*京东保价* \n\n ${data}`);
 
 	await page.close();
 
